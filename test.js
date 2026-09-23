@@ -32,8 +32,51 @@ Make the queries specific to the user's location when a location is provided.Ret
     ]
 
 });
-    res.json({
-        result: response.choices[0].message.content
+    const searches = JSON.parse(response.choices[0].message.content);
+
+const instagramResults = [];
+
+for (const query of searches.instagramSearches) {
+  const instagramInput = {
+    search: query,
+    searchType: "user",
+    searchLimit: 5
+  };
+
+  const instagramRun = await client
+    .actor("apify/instagram-search-scraper")
+    .call(instagramInput);
+
+  const { items } = await client
+    .dataset(instagramRun.defaultDatasetId)
+    .listItems();
+
+  instagramResults.push(...items);
+}
+
+const googleMapsResults = [];
+
+for (const query of searches.googleMapsSearches) {
+  const googleMapsInput = {
+    searchStringsArray: [query],
+    maxCrawledPlacesPerSearch: 10
+  };
+
+  const googleMapsRun = await client
+    .actor("compass/crawler-google-places")
+    .call(googleMapsInput);
+
+  const { items } = await client
+    .dataset(googleMapsRun.defaultDatasetId)
+    .listItems();
+
+  googleMapsResults.push(...items);
+}
+
+res.json({
+  result: response.choices[0].message.content,
+  instagram: instagramResults,
+  googleMaps: googleMapsResults
 });
 
 });
