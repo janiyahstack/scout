@@ -11,6 +11,8 @@ const client = new OpenAI({
 
 });
 app.post("/search", async (req, res) => {
+
+    console.log(req.body);
     const searchQuery = req.body.searchQuery;
     const response = await client.responses.create({
          model: "gpt-5.6-luna",
