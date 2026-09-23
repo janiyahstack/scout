@@ -19,12 +19,13 @@ app.post("/search", async (req, res) => {
          messages: [
             {
               role: "system",
-              content: "You are ScoutBiz's search planning agent. The user will describe the type of business opportunity they want to find. Your job is to turn their request into useful social media search parameters for ScoutBiz. Generate: - relevant hashtags, - relevant places, - relevant business niches or categories. The goal is to discover REAL businesses and potential clients, not simply generate popular hashtags. Think about what kinds of businesses would realistically match the user's request. Use specific, commercially relevant hashtags rather than extremely broad hashtags. Return the result as JSON with: hashtags, places, businessTypes"
-         },
-        {
+              content: "You are ScoutBiz's search planning agent. The user will describe the type of business opportunity they want to find. Your job is to turn their request into useful social media search parameters for ScoutBiz. Generate: - relevant search prompts for clients in their field on Instagram, - relevant business niches or categories. The goal is to discover REAL businesses and potential clients, who may need the service the user claims to offer. Think about what kinds of businesses would realistically match the user's request. Use specific, commercially relevant search prompts rather than extremely broad prompts. Return the result as JSON with: places, businessTypes, popular influencers who may need the service or have recently made a video or announcement about needing the service"
+            },
+            {
             role: "user",
             content: searchQuery
         }
+    
     ]
 
 });
