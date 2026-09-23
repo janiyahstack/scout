@@ -7,14 +7,15 @@ app.use(cors());
 app.use(express.json());
 
 const client = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.HACKCLUB_API_KEY,
+    baseURL: " https://ai.hackclub.com/proxy/v1"
 
 });
 app.post("/search", async (req, res) => {
 
     console.log(req.body);
     const searchQuery = req.body.searchQuery;
-    const response = await client.responses.create({
+    const response = await client.chat.completions({
          model: "gpt-5.6-luna",
          instructions:  `
 You are ScoutBiz's search planning agent.
