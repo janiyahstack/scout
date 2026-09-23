@@ -1,13 +1,18 @@
 import "dotenv/config";
+import express from "express";
 import OpenAI from "openai";
+const app = express();
+app.use|(express.json());
+
 const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 
 });
-export default async function handler(req, res) {
+app.post("/search", async (req, res) => {
     const searchQuery = req.body.searchQuery;
     const response = await client.responses.create({
-        instructions:  `
+         model: "gpt-5.6-luna",
+         instructions:  `
 You are ScoutBiz's search planning agent.
 
 The user will describe the type of business opportunity they want to find.
@@ -28,11 +33,16 @@ Use specific, commercially relevant hashtags rather than extremely broad hashtag
 Return the result as JSON with:
 hashtags, places, businessTypes
 `,
-        model: "gpt-5.6-luna",
         input: searchQuery,
 
-    });
+});
     res.json({
         result: response.output_text
+});
+
+});
+    const PORT = process.env.PORT
+    || 10000;
+    app.listen(PORT, "0.0.0.0", () => {
+        console.log(`API running on port ${PORT}`);
     });
-}
