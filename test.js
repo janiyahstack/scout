@@ -43,13 +43,9 @@ for (const query of searches.instagramSearches) {
     searchLimit: 5
   };
 
-  const instagramRun = await client
-    .actor("apify/instagram-search-scraper")
-    .call(instagramInput);
+  const instagramRun = await client.actor("apify/instagram-search-scraper").call(instagramInput);
 
-  const { items } = await client
-    .dataset(instagramRun.defaultDatasetId)
-    .listItems();
+  const { items } = await client.dataset(instagramRun.defaultDatasetId).listItems();
 
   instagramResults.push(...items);
 }
@@ -59,16 +55,12 @@ const googleMapsResults = [];
 for (const query of searches.googleMapsSearches) {
   const googleMapsInput = {
     searchStringsArray: [query],
-    maxCrawledPlacesPerSearch: 10
+    maxCrawledPlacesPerSearch: 5
   };
 
-  const googleMapsRun = await client
-    .actor("compass/crawler-google-places")
-    .call(googleMapsInput);
+  const googleMapsRun = await client.actor("compass/crawler-google-places").call(googleMapsInput);
 
-  const { items } = await client
-    .dataset(googleMapsRun.defaultDatasetId)
-    .listItems();
+  const { items } = await client.dataset(googleMapsRun.defaultDatasetId).listItems();
 
   googleMapsResults.push(...items);
 }
