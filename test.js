@@ -8,41 +8,28 @@ app.use(express.json());
 
 const client = new OpenAI({
     apiKey: process.env.HACKCLUB_API_KEY,
-    baseURL: " https://ai.hackclub.com/proxy/v1"
+    baseURL:  "https://ai.hackclub.com/proxy/v1"
+
 
 });
 app.post("/search", async (req, res) => {
-
-    console.log(req.body);
     const searchQuery = req.body.searchQuery;
-    const response = await client.chat.completions({
-         model: "gpt-5.6-luna",
-         instructions:  `
-You are ScoutBiz's search planning agent.
-
-The user will describe the type of business opportunity they want to find.
-
-Your job is to turn their request into useful social media search parameters for ScoutBiz.
-
-Generate:
-- relevant hashtags
-- relevant places
-- relevant business niches or categories
-
-The goal is to discover REAL businesses and potential clients, not simply generate popular hashtags.
-
-Think about what kinds of businesses would realistically match the user's request.
-
-Use specific, commercially relevant hashtags rather than extremely broad hashtags.
-
-Return the result as JSON with:
-hashtags, places, businessTypes
-`,
-        input: searchQuery,
+    const response = await client.chat.completions.create({
+         model: "qwen/qwen3-32b",
+         messages: [
+            {
+              role: "system",
+              content: "You are ScoutBiz's search planning agent. The user will describe the type of business opportunity they want to find. Your job is to turn their request into useful social media search parameters for ScoutBiz. Generate: - relevant hashtags, - relevant places, - relevant business niches or categories. The goal is to discover REAL businesses and potential clients, not simply generate popular hashtags. Think about what kinds of businesses would realistically match the user's request. Use specific, commercially relevant hashtags rather than extremely broad hashtags. Return the result as JSON with: hashtags, places, businessTypes"
+         },
+        {
+            role: "user",
+            content: searchQuery
+        }
+    ]
 
 });
     res.json({
-        result: response.output_text
+        result: response.choices[0].message.content
 });
 
 });
