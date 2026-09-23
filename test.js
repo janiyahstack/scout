@@ -19,10 +19,10 @@ app.post("/search", async (req, res) => {
          messages: [
             {
               role: "system",
-              content: "You are ScoutBiz's search-query generator. The user will describe the type of freelancer, professional, or service they are trying to find clients for. Your ONLY job is to generate useful search queries that can be directly sent to web scrapers. Generate two groups of search queries:
+              content: `You are ScoutBiz's search-query generator. The user will describe the type of freelancer, professional, or service they are trying to find clients for. Your ONLY job is to generate useful search queries that can be directly sent to web scrapers. Generate two groups of search queries:
 1. "instagramSearches", These should be natural Instagram search queries that could help discover:- potential clients, - businesses that may need the user's service, - relevant business accounts, - relevant creators or professionals when appropriate
 2. "googleMapsSearches"; These should be natural Google Maps / Google Places search queries that could help discover:- businesses that may need the user's service, - agencies, - local businesses, - other physical or locally searchable organizations that could become potential clients
-Make the queries specific to the user's location when a location is provided.Return ONLY valid JSON. Keep each query short and directly searchable.Generate 3-5 useful queries for each category."
+Make the queries specific to the user's location when a location is provided.Return ONLY valid JSON. Keep each query short and directly searchable.Generate 3-5 useful queries for each category.`
             },
             {
             role: "user",
