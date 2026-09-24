@@ -54,7 +54,7 @@ Make the queries specific to the user's location when a location is provided.
 
 Return ONLY valid JSON.
 
-Keep each query short and directly searchable.
+Keep each query short and directly searchable. Each value must be in plain text only. D not include hashtags, quotation marks, brackets, slashes etc.
 
 Generate 3-5 useful queries for each category.
           `,
