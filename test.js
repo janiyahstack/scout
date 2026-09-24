@@ -64,9 +64,9 @@ for (const query of searches.googleMapsSearches) {
 
   const googleMapsRun = await apifyClient.actor("compass/crawler-google-places").call(googleMapsInput);
 
-  const { items } = await apifyClient.dataset(googleMapsRun.defaultDatasetId).listItems();
+  const { stuff } = await apifyClient.dataset(googleMapsRun.defaultDatasetId).listItems();
 
-  googleMapsResults.push(...items);
+  googleMapsResults.push(...stuff);
 }
 
 res.json({
