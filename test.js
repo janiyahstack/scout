@@ -37,9 +37,10 @@ Make the queries specific to the user's location when a location is provided.Ret
 
 });
     const searches = JSON.parse(response.choices[0].message.content);
+    console.log(response.choices[0].message.content);
 
 const instagramResults = [];
-
+console.log("instagram scraper starting");
 for (const query of searches.instagramSearches) {
   const instagramInput = {
     search: query,
@@ -53,8 +54,10 @@ for (const query of searches.instagramSearches) {
 
   instagramResults.push(...items);
 }
+    console.log("instagram scraper finished");
 
 const googleMapsResults = [];
+    console.log("Google map scraper is starting");
 
 for (const query of searches.googleMapsSearches) {
   const googleMapsInput = {
@@ -68,6 +71,7 @@ for (const query of searches.googleMapsSearches) {
 
   googleMapsResults.push(...stuff);
 }
+    console.log("Google map scraper finsihed");
 
 res.json({
   result: response.choices[0].message.content,
