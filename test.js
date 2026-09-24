@@ -12,7 +12,7 @@ const client = new OpenAI({
     baseURL:  "https://ai.hackclub.com/proxy/v1"
 
 });
-const client = new ApifyClient({
+const apifyClient = new ApifyClient({
     token: process.env.APIFY_API_TOKEN,
 });
 
@@ -47,9 +47,9 @@ for (const query of searches.instagramSearches) {
     searchLimit: 5
   };
 
-  const instagramRun = await client.actor("apify/instagram-search-scraper").call(instagramInput);
+  const instagramRun = await apifyClient.actor("apify/instagram-search-scraper").call(instagramInput);
 
-  const { items } = await client.dataset(instagramRun.defaultDatasetId).listItems();
+  const { items } = await apifyClient.dataset(instagramRun.defaultDatasetId).listItems();
 
   instagramResults.push(...items);
 }
@@ -62,9 +62,9 @@ for (const query of searches.googleMapsSearches) {
     maxCrawledPlacesPerSearch: 5
   };
 
-  const googleMapsRun = await client.actor("compass/crawler-google-places").call(googleMapsInput);
+  const googleMapsRun = await apifyClient.actor("compass/crawler-google-places").call(googleMapsInput);
 
-  const { items } = await client.dataset(googleMapsRun.defaultDatasetId).listItems();
+  const { items } = await apifyClient.dataset(googleMapsRun.defaultDatasetId).listItems();
 
   googleMapsResults.push(...items);
 }
