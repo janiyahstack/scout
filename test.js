@@ -63,7 +63,8 @@ for (const query of searches.googleMapsSearches) {
   const googleMapsInput = {
     searchStringsArray: [query],
     maxCrawledPlacesPerSearch: 5
-  };
+  }
+};
 
   const googleMapsRun = await apifyClient.actor("compass/crawler-google-places").call(googleMapsInput);
 
@@ -72,6 +73,7 @@ for (const query of searches.googleMapsSearches) {
  if 
  (Array.isArray(googleMapsStuff)) {
       googleMapsResults.push(...googleMapsStuff);
+}
 }
     console.log("Google map scraper finsihed");
 
