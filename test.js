@@ -15,7 +15,7 @@ const apifyClient = new ApifyClient({
     token: process.env.APIFY_API_TOKEN,
 });
 
-app.post("/search", async (req, res)) => {
+app.post("/search", async (req, res) => {
     const searchQuery = req.body.searchQuery;
     const response = await client.chat.completions.create({
          model: "qwen/qwen3-32b",
@@ -33,10 +33,10 @@ Make the queries specific to the user's location when a location is provided.Ret
         }
     
     ]
+    });
 
-});
+
     const searches = JSON.parse(response.choices[0].message.content);
-    console.log(response.choices[0].message.content);
 
 const instagramResults = [];
 console.log("instagram scraper starting");
@@ -88,3 +88,4 @@ res.json({
     app.listen(PORT, "0.0.0.0", () => {
         console.log(`API running on port ${PORT}`);
     });
+});
