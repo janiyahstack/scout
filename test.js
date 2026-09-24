@@ -67,9 +67,10 @@ for (const query of searches.googleMapsSearches) {
 
   const googleMapsRun = await apifyClient.actor("compass/crawler-google-places").call(googleMapsInput);
 
-  const { stuff } = await apifyClient.dataset(googleMapsRun.defaultDatasetId).listItems();
+  const { Stuff } = await apifyClient.dataset(googleMapsRun.defaultDatasetId).listItems();
 
-  googleMapsResults.push(...stuff);
+  if (Array.isArray(googleMapsStuff)) {
+      googleMapsResults.push(...Stuff);
 }
     console.log("Google map scraper finsihed");
 
