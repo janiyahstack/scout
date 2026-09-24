@@ -69,8 +69,9 @@ for (const query of searches.googleMapsSearches) {
 
   const { Stuff } = await apifyClient.dataset(googleMapsRun.defaultDatasetId).listItems();
 
-  if (Array.isArray(googleMapsStuff)) {
-      googleMapsResults.push(...Stuff);
+ if 
+ (Array.isArray(googleMapsStuff)) {
+      googleMapsResults.push(...googleMapsStuff);
 }
     console.log("Google map scraper finsihed");
 
