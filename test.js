@@ -10,13 +10,12 @@ app.use(express.json());
 const client = new OpenAI({
     apiKey: process.env.HACKCLUB_API_KEY,
     baseURL:  "https://ai.hackclub.com/proxy/v1"
-
 });
 const apifyClient = new ApifyClient({
     token: process.env.APIFY_API_TOKEN,
 });
 
-app.post("/search", async (req, res) => {
+app.post("/search", async (req, res)) => {
     const searchQuery = req.body.searchQuery;
     const response = await client.chat.completions.create({
          model: "qwen/qwen3-32b",
