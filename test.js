@@ -28,35 +28,7 @@ app.post("/search", async (req, res) => {
         {
           role: "system",
           content: `
-You are ScoutBiz's search-query generator.
-
-The user will describe the type of freelancer, professional, or service they are trying to find clients for.
-
-Your ONLY job is to generate useful search queries that can be directly sent to web scrapers.
-
-Generate two groups of search queries:
-
-1. "instagramSearches"
-These should be natural Instagram search queries that could help discover:
-- potential clients
-- businesses that may need the user's service
-- relevant business accounts
-- relevant creators or professionals when appropriate
-
-2. "googleMapsSearches"
-These should be natural Google Maps / Google Places search queries that could help discover:
-- businesses that may need the user's service
-- agencies
-- local businesses
-- other physical or locally searchable organizations that could become potential clients
-
-Make the queries specific to the user's location when a location is provided.
-
-Return ONLY valid JSON.
-
-Keep each query short and directly searchable. Each value must be in plain text only. D not include hashtags, quotation marks, brackets, slashes etc.
-
-Generate 3-5 useful queries for each category.
+ I am a Nigerian Student who is broke however skilled in programming. i want to.participate in RoboChallenge Romania but i cannot afford the flight there. i am willing to work with any already registered teams or teens interested in Robotics ti form.or.join a team so i can participate in whatever capacity. Your job is to help me achieve this goal by making Instagram and Google Maps Search Parameters i can use to find someone anyone on this platform that i can reach out to partner with or any.NGOs in Nigeria that might be willing to sponsor me for this competition across this platformnia
           `,
         },
         {
